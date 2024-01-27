@@ -86,13 +86,13 @@ class CoraDataset(InMemoryDataset):
         return "data.pt"
 
     def download(self):
-        # for name in self.raw_file_names:
-        #     download_url(f"{self.url}/{name}", self.raw_dir)
-        # if self.split == "geom-gcn":
-        #     for i in range(10):
-        #         url = f"{self.geom_gcn_url}/splits/{self.name.lower()}"
-        #         download_url(f"{url}_split_0.6_0.2_{i}.npz", self.raw_dir)
-        pass
+        for name in self.raw_file_names:
+            download_url(f"{self.url}/{name}", self.raw_dir)
+        if self.split == "geom-gcn":
+            for i in range(10):
+                url = f"{self.geom_gcn_url}/splits/{self.name.lower()}"
+                download_url(f"{url}_split_0.6_0.2_{i}.npz", self.raw_dir)
+        # pass
 
     def process(self):
         print("process data")
