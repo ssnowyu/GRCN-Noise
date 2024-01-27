@@ -18,8 +18,7 @@ The code is based on [pyg](https://github.com/rusty1s/pytorch_geometric). Please
 ./run_fixed.sh 1(GPU No.) GRCN Cora(dataset: Cora, CiteSeer, PubMed) --sparse
 ```   
 To save the log result, add `--save` in the command.  
-You can change the parameters of *run_fixed.sh* and *config/*.    
-
+You can change the parameters of *run_fixed.sh* and *config/*.
 
 ### Run our model GRCN under random train/val/test split
 ```
@@ -54,3 +53,13 @@ Our model achieves the following performance on :
 | GLCN      | 81.4±1.9 | 69.8±1.8 | 77.2±3.2 |
 | Fast-GRCN | 83.8±1.6 | 72.3±1.4 | 77.6±3.2 |
 | GRCN      | 83.7±1.7 | 72.6±1.3 | 77.9±0.2 |
+
+
+# 带噪声的版本
+运行
+```shell
+./run_random_noise.sh 1 GRCN Cora --sparse
+```
+相比原代码仅修改了CoraDataset。包含两个位置：
+1. utils.load_dataset()。将`if name in ["Cora", "CiteSeer", "PubMed"]:`分支的`Planetoid`dataset修改为自定以的`data.CoraDataset`。前者为pyg自带的数据集，后者为基于pyg数据集修改的带有噪声版本的Cora数据集。
+2. data.CoraDataset。基于pyg原始数据集修改的带有高斯噪声的Cora数据集
